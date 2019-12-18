@@ -1,7 +1,14 @@
 import React from "react";
 
-const App = () => {
-  return <div>hello react</div>;
+import UserContainer from "./containers/UserContainer";
+
+const App = props => {
+  return (
+    <div>
+      hello react
+      <UserContainer />
+    </div>
+  );
 };
 
 export default App;

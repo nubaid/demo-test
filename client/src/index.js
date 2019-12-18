@@ -11,7 +11,9 @@ import { HttpLink } from "apollo-link-http";
 import App from "./App";
 
 // create a http link
-const httpLink = new HttpLink({ uri: "http://localhost:4000" });
+const httpLink = new HttpLink({
+  uri: "http://localhost:4998/graphql"
+});
 
 // // An Apollo Link for error handling
 const errorLink = onError(({ graphQLErrors, networkError }) => {
