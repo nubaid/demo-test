@@ -1,0 +1,39 @@
+.dl-skin {
+  height: 150px;
+  max-width: 200px;
+  /* margin: 0 auto 1em; */
+  position: relative;
+  /* background-size: 100%; */
+}
+/* .dl-skin img {
+  /* max-width: 100%; */
+/* height: auto;
+  display: block; */
+/* height: 100%;
+  width: 100%;
+  object-fit: fill;
+  position:absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%); 
+} */
+
+.head-title {
+  padding: 5px 10px;
+  margin-top: 1em;
+  /* margin-bottom: 1em; */
+  background: #ececec;
+}
+.head-title h4 {
+  font-size: 1.125em;
+  margin: 0;
+}
+
+th,
+td {
+  padding: 0.5em !important;
+}
+
+cursor-pointer {
+  cursor: "pointer";
+}

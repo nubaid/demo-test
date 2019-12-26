@@ -6,6 +6,7 @@ require("dotenv").config();
 // create our express app
 const app = express();
 const graphQLHTTP = require("express-graphql");
+const { graphqlUploadExpress } = require("graphql-upload");
 
 const models = require("./models");
 // console.log("models", models);
@@ -31,24 +32,9 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
   // Allowing only 'Content-Type' & 'Authorization' Headers
   res.setHeader(
-    //   if (req.body) {
-    //     const result = await models.User.create(req.body);
-    //     return res.send(result).status(201);
-    //   }
-    // });
-    // app.get("/", (req, res) => {
-    //   return res.send("index page").status(200);
-    // });
     "Access-Control-Allow-Headers",
     "Content-Type, Authorization, X-Token, X-Refresh-Token"
-  ); //   if (req.body) {
-  //     const result = await models.User.create(req.body);
-  //     return res.send(result).status(201);
-  //   }
-  // });
-  // app.get("/", (req, res) => {
-  //   return res.send("index page").status(200);
-  // });
+  );
   // When request method is OPTIONS
   // Don't allow request to reach our GraphQL API's
   if (req.method === "OPTIONS") {
@@ -63,6 +49,11 @@ const schema = require("./graphql/schema");
 
 app.use(
   "/graphql",
+  graphqlUploadExpress({
+    uploadDir: "./uploads/",
+    maxFileSize: 3000000,
+    maxFiles: 10
+  }),
   graphQLHTTP(req => ({
     schema,
     graphiql: true,
@@ -76,6 +67,8 @@ app.use(
 app.get("/**", (req, res) => {
   res.sendFile(path.resolve(__dirname, "client", "index.html"));
 });
+console.log("directory", __dirname, __filename);
+
 // send status 404 if request is not fulfill
 app.get("*", async (req, res) => {
   res.send("404 error").status(404);

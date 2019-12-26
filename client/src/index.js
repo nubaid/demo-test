@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { ApolloClient } from "apollo-client";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { InMemoryCache } from "apollo-cache-inmemory";
-// import { createUploadLink } from "apollo-upload-client";
+import { createUploadLink } from "apollo-upload-client";
 import { onError } from "apollo-link-error";
 import { ApolloLink } from "apollo-link";
 import { setContext } from "apollo-link-context";
@@ -11,8 +11,8 @@ import { HttpLink } from "apollo-link-http";
 import App from "./App";
 
 // create a http link
-const httpLink = new HttpLink({
-  uri: "http://localhost:4998/graphql"
+const httpLink = new createUploadLink({
+  uri: "http://localhost:4040/graphql"
 });
 
 // // An Apollo Link for error handling

@@ -1,11 +1,26 @@
 import gql from "graphql-tag";
-import { userFragments } from "./fragments";
 
-export const GET_USERS_QUERY = gql`
-  query allUsers {
-    users {
-      ...userInfo
+export const GET_CUSTOMERS_QUERY = gql`
+  query allCustomers {
+    customers {
+      id
+      firstName
+      lastName
+      companyName
+      image
+      email
+      address
+      city
+      state
+      zip
+      orders {
+        id
+        items
+        totalCharges
+        paymentMode
+      }
+      createdAt
+      updatedAt
     }
   }
-  ${userFragments}
 `;

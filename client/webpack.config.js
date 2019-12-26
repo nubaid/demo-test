@@ -30,12 +30,12 @@ module.exports = {
     contentBase: path.join(__dirname, "dist"),
     compress: true,
     // host: '192.168.0.134',3
-    port: 4990,
+    port: 4001,
     historyApiFallback: true, // resolves error while refresh or access directly
     // from browser. Error GET /someroot
     proxy: {
       "/": {
-        target: "http://localhost:4998",
+        target: "http://localhost:4040",
         secure: false
       }
     }
