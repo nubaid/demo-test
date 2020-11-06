@@ -1,4 +1,36 @@
 "use strict";
+
+
+/**
+ * @swagger
+ * definitions:
+ * Customer:
+ * type: object
+ * properties: 
+ * firstName:
+ * type: string
+ * lastName: 
+ * type: string
+ * email:
+ * type: string
+ * companyName:
+ * type: string
+ * image: 
+ * type: string
+ * address:
+ * type: string
+ * city: 
+ * type: string 
+ * state:
+ * type: string 
+ * zip:
+ * type: string 
+ * responses:
+ * '200':
+ * description: Customer fetch successfully
+ * '401': 
+ * description: not fatch bad request
+ */
 module.exports = (sequelize, DataTypes) => {
   const Customer = sequelize.define(
     "Customer",

@@ -1,6 +1,9 @@
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
+const swaggerJSDoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocs = require("./swagger.json");
 require("dotenv").config();
 
 // create our express app
@@ -9,8 +12,22 @@ const graphQLHTTP = require("express-graphql");
 const { graphqlUploadExpress } = require("graphql-upload");
 
 const models = require("./models");
-// console.log("models", models);
+const options = {
+  // import swaggerDefinitions
+  swaggerDefinition: swaggerDocs,
+  // path to the API docs
+  apis: ["./routes/*.js"],
+};
 
+// initialize swagger-jsdoc
+var swaggerSpec = swaggerJSDoc(options);
+//const swaggerDocs = swaggerJSDoc(options);
+// console.log("models", models);
+// serve swagger
+app.get('/swagger.json', function(req, res) {
+  res.setHeader('Content-Type', 'application/json');
+  res.send(swaggerSpec);
+});
 // set our static directory for css, images, and other static content
 app.use(express.static("public"));
 // parse the body for params etc...
@@ -73,7 +90,7 @@ console.log("directory", __dirname, __filename);
 app.get("*", async (req, res) => {
   res.send("404 error").status(404);
 });
-
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 const server = app.listen(process.env.PORT || 4999, () => {
   console.log("Example app is running → PORT ", process.env.PORT || 4999);
 });
